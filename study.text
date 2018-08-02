@@ -1,0 +1,61 @@
+#1.Framework for developing a Reacp app
+    1. Break the app into components
+    2. Build a static version of the app
+    3. Determine what should be stateful
+    4. Determine in which component each piece of state should live
+    5. Hard-code initial states
+    6. Add inverse data flow
+
+#2. State criteria
+    1. Is it passed in from a parent via props? If so, it probably isn't state.
+    2. Does it change over time? If not, it probably isn't state.
+        This is a key criterion of stateful data: it changes
+    3. Can you compute it based on any other state or props in your component?
+        If so, it's not state.
+        For simplicity, we want to strive to represent state with as few data points as possible.
+
+#3. Applying the criteria
+TimersDashboard
+- isOpen boolean for ToggleableTimerForm 
+: Stateful. The data is defined here. It changes over time. And it cannot be computed from other state or props.
+
+EditableTimerList
+- Timer properties
+: Stateful. The data is defined in this compoent, changes over time, and cannot be computed from other state or props.
+
+EditableTimer
+- editFormOpen for a given timer
+: Stateful. The data is defined in this compoent, changes over time, and cannot be computed from other state or props.
+
+Timer
+- Timer properties
+: In this context, not stateful. Properties are passed down from the parent.
+
+TimerForm  
+We might be tempted to conclude that TimerForm doens't manage any stateful data, as title and project are props 
+passed down from the parent. However, as we'll see, forms are special state managers in their own right.
+So, outside of TimerForm, we've identified our stateful data:
+- The list of timers and properties of each timer
+- Whether or not the edit form of a timer is open
+- Whether or not the create form is open
+
+#4. Determine in which component each piece of state should live
+For each piece of state:
+- Identify every component that renders something based on that state
+- Find a common owner component (a single component above all the components that need the state in the hierarchy).
+- Either the common owner or another component higher up in the hierarchy should own the state.
+- If you can't find a component where it makes sense to own the state, create a new component simply for holding the
+state and add it somewhere in the hierarch above the common owner component.
+
+In summary, we'll have three pieces of state each in three different components:
+- Timer data will be owned and managed by TimersDashboard.
+- Each EditableTimer will manage the state of its timer edit form.
+- The ToggleableTimerForm will manage the state of its form visibility.
+
+#5. Hard-code initial states (Props & State)
+: props are state's immutable accomplice. Props acts as state's one way pipeline.
+State is managed in some select parent components and then that data flows down through children as props.
+If state is updated, the component managing that state re-renders by calling render().
+This, in turn, causes any of its children to re-render as well. And the children of those children.
+
+In React, forms are stateful. All modifications that are made to a component should be handled by React and kept in state.
