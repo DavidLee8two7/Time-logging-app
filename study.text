@@ -59,3 +59,4 @@ If state is updated, the component managing that state re-renders by calling ren
 This, in turn, causes any of its children to re-render as well. And the children of those children.
 
 In React, forms are stateful. All modifications that are made to a component should be handled by React and kept in state.
+
