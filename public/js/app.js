@@ -73,6 +73,27 @@ class EditableTimer extends React.Component {
     editFormOpen: false
   };
 
+  handleEditClick = () => {
+    this.openForm();
+  };
+
+  handleFormClose = () => {
+    this.closeForm();
+  };
+
+  handleSubmit = (timer) => {
+    this.props.onFormSubmit(timer);
+    this.closeForm();
+  };
+
+  closeForm = () => {
+    this.setState({ editFormOpen: false });
+  };
+
+  openForm = () => {
+    this.setState({ editFormOpen: true });
+  };
+
   render() {
     if (this.state.editFormOpen) {
       return (
@@ -114,7 +135,10 @@ class Timer extends React.Component {
             </h2>
           </div>
           <div className='extra content'>
-            <span className='right floated edit icon'>
+            <span 
+              className='right floated edit icon'
+              onClick={this.props.onEditClick}  
+            >
               <i className='edit icon' />
             </span>
             <span className='right floated trash icon'>
