@@ -1,23 +1,20 @@
 // Adding state to TimersDashboard
 class TimersDashboard extends React.Component {
   state = {
-    timers: [
-      {
-        title: 'Practice squat',
-        project: 'Gym Chores',
-        id: uuid.v4(),
-        elapsed: 5456099,
-        runningSince: Date.now()
-      },
-      {
-        title: 'Bake squash',
-        project: 'Kitchen Chores',
-        id: uuid.v4(),
-        elapsed: 1273998,
-        runningSince: null
-      }
-    ]
-  }
+    timers: []
+  };
+
+  componentDidMount() {
+    this.loadTimersFromServer();
+    setInterval(this.loadTimersFromServer, 5000);
+  };
+
+  loadTimersFromServer = () => {
+    client.getTimers((serverTimers) => (
+      this.setState({ timers: serverTimers })
+    ))
+  };
+
   // Inside TimersDashboard
   handleCreateFormSubmit = (timer) => {
     this.createTimer(timer);
@@ -254,9 +251,6 @@ class Timer extends React.Component {
               <i className='trash icon' />
             </span>
           </div>
-        </div>
-        <div className='ui bottom attached blue basic button'>
-          Start
         </div>
         <TimerActionButton 
           timerIsRunning={!!this.props.runningSince}
