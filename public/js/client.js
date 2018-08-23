@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-/* eslint-disable no-undef */
+/* eslint-disable no-undef */ 
 window.client = (function () {
   function getTimers(success) {
     return fetch('/api/timers', {
