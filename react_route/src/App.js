@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import Radium from "radium";
+import Radium, { StyleRoot } from "radium";
 import Person from "./Person/Person";
 
 // needs id for the key attribute for the list
@@ -94,17 +94,19 @@ class App extends Component {
     }
 
     return (
-      <div className="App person">
-        <div>
-          <h1>Hi, I'm a React app</h1>
-          <p className={classes.join(" ")}>This is really working!</p>
-        </div>
+      <StyleRoot>
+        <div className="App person">
+          <div>
+            <h1>Hi, I'm a React app</h1>
+            <p className={classes.join(" ")}>This is really working!</p>
+          </div>
 
-        <button style={style} onClick={this.toggleHandler}>
-          person
-        </button>
-        {people}
-      </div>
+          <button style={style} onClick={this.toggleHandler}>
+            person
+          </button>
+          {people}
+        </div>
+      </StyleRoot>
     );
   }
 }
