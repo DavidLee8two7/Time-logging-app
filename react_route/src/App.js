@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import classes from "./App.css";
 import Person from "./Person/Person";
 
-// needs id for the key attribute for the list
 class App extends Component {
   state = {
     persons: [
@@ -13,7 +12,6 @@ class App extends Component {
     showPeople: false
   };
 
-  // how to use boolean for toggle
   toggleHandler = () => {
     const doesShow = this.state.showPeople;
     this.setState({ showPeople: !doesShow });
@@ -23,8 +21,7 @@ class App extends Component {
     const personIndex = this.state.persons.findIndex(person => {
       return person.id === personId;
     });
-    // creating brand new object
-    // const person = Object.assign({}, this.state.persons[personIndex]);
+
     const person = {
       ...this.state.persons[personIndex]
     };
@@ -36,26 +33,16 @@ class App extends Component {
     this.setState({ persons: people });
   };
 
-  // immutable
   deleteHandler = personIndex => {
-    // const persons = this.state.persons.slice();
     const persons = [...this.state.persons];
     persons.splice(personIndex, 1);
     this.setState({ persons: persons });
   };
 
   render() {
-    const style = {
-      backgroundColor: "pink",
-      font: "inherit",
-      border: "2px solid blue",
-      padding: "8px",
-      cursor: "pointer"
-    };
-
-    // to render conditionally
     let people = null;
-    // just by using JavaScript
+    let btnClass = "";
+
     if (this.state.showPeople) {
       people = (
         <div>
@@ -72,7 +59,7 @@ class App extends Component {
           })}
         </div>
       );
-      style.backgroundColor = "green";
+      btnClass = classes.Red;
     }
 
     const assignedClasses = [];
@@ -91,7 +78,7 @@ class App extends Component {
           <p className={assignedClasses.join(" ")}>This is really working!</p>
         </div>
 
-        <button style={style} onClick={this.toggleHandler}>
+        <button className={btnClass} onClick={this.toggleHandler}>
           person
         </button>
         {people}
