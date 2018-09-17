@@ -1,4 +1,4 @@
-.cockpit button {
+.button {
   border: 1px solid blue;
   padding: 16px;
   background-color: green;
@@ -7,16 +7,20 @@
   cursor: pointer;
 }
 
-.cockpit button:hover {
+.button:hover {
   background-color: lightgreen;
   color: black;
 }
 
-.cockpit button.Red {
+.button:hover {
+  background-color: lightgreen;
+  color: black;
+}
+
+.button .Red {
   background-color: red;
 }
 
-.cockpit button.Red:hover {
-  background-color: salmon;
-  color: black;
+.bold {
+  bolder: 3px solid #000;
 }
