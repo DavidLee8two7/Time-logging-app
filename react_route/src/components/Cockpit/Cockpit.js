@@ -2,7 +2,7 @@ import React from "react";
 
 import classes from "./cockpit.css";
 
-const Cockpit = props => {
+const cockpit = props => {
   const assignedClasses = [];
   let btnClass = "";
   if (props.showPersons) {
@@ -17,8 +17,8 @@ const Cockpit = props => {
   }
 
   return (
-    <div className={classes.Cockpit}>
-      <h1>Hi, I'm a React app</h1>
+    <div className={classes.cockpit}>
+      <h1>{props.appTitle}</h1>
       <p className={assignedClasses.join(" ")}>This is really working!</p>
 
       <button className={btnClass} onClick={props.clicked}>
@@ -28,4 +28,4 @@ const Cockpit = props => {
   );
 };
 
-export default Cockpit;
+export default cockpit;
