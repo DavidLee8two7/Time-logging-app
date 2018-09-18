@@ -24,6 +24,7 @@ class App extends PureComponent {
     };
   }
 
+  // not recommand to use it anymore from React 16.3
   componentWillMount() {
     console.log("[App.js] Inside componentWillMount()");
   }
@@ -45,12 +46,26 @@ class App extends PureComponent {
   //   );
   // }
 
+  // not recommand to use it anymore from React 16.3
   componentWillUpdate(nextProps, nextState) {
     console.log(
       "[UPDATE App.js] Inside componentWillUpdate",
       nextProps,
       nextState
     );
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    console.log(
+      "[UPDATE App.js] Inside getDerivedStateFromProps",
+      nextProps,
+      prevState
+    );
+    return prevState;
+  }
+
+  getSnapshotBeforeUpdate() {
+    console.log("[UPDATE App.js] Inside getSnapshotBeforeUpdate");
   }
 
   componentDidUpdate() {
@@ -132,3 +147,7 @@ class App extends PureComponent {
 }
 
 export default withClass(App, classes.App);
+
+// React 16.3 update recommends to stop use below
+// componentWillMount, componentWillUpdate, componentWillReceiveProps
+// they often were used incorrectly
