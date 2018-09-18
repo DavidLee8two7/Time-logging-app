@@ -3,7 +3,9 @@ import classes from "./App.css";
 import Persons from "../components/Persons/Persons";
 import Cockpit from "../components/Cockpit/Cockpit";
 import Aux from "../hoc/Aux";
-import withClass from "../hoc/WithClass"; // returning a function now
+import withClass from "../hoc/WithClass"; // returning a function component now
+
+export const AuthContext = React.createContext(false);
 
 class App extends PureComponent {
   constructor(props) {
@@ -75,10 +77,10 @@ class App extends PureComponent {
     };
     person.name = event.target.value;
     // creating brand new array
-    const people = [...this.state.persons];
-    people[personIndex] = person;
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
     // replacing it with brand new state
-    this.setState({ persons: people });
+    this.setState({ persons: persons });
   };
 
   deleteHandler = personIndex => {
@@ -93,15 +95,14 @@ class App extends PureComponent {
 
   render() {
     console.log("[App.js] Inside render()");
-    let people = null;
+    let persons = null;
 
     if (this.state.showPersons) {
-      people = (
+      persons = (
         <Persons
           persons={this.state.persons}
           clicked={this.deleteHandler}
           changed={this.changeHandler}
-          isAuthenticated={this.state.authenticated}
         />
       );
     }
@@ -122,7 +123,9 @@ class App extends PureComponent {
           clicked={this.toggleHandler}
           login={this.loginHandler}
         />
-        {people}
+        <AuthContext.Provider value={this.state.authenticated}>
+          {persons}
+        </AuthContext.Provider>
       </Aux>
     );
   }
