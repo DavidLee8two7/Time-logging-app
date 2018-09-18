@@ -14,7 +14,7 @@ import React, { Component } from "react";
 //   );
 // };
 
-// Using it as function to create component
+// Using it as function to create class component
 const withClass = (WrappedComponent, className) => {
   return class extends Component {
     render() {
